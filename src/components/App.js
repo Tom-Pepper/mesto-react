@@ -34,7 +34,7 @@ function App() {
     <div className="page">
       <Header />
 
-      <Main 
+      <Main
         isEditAvatarPopupOpen={handleEditAvatarClick}
         isEditProfilePopupOpen={handleEditProfileClick}
         isAddPlacePopupOpen={handleAddPlaceClick}
@@ -42,7 +42,7 @@ function App() {
 
       <Footer />
 
-      <PopupWithForm 
+      <PopupWithForm
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         title="Обновить аватар"
@@ -62,7 +62,75 @@ function App() {
         >
         </span>
       </PopupWithForm>
-        
+
+      <PopupWithForm
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        title="Новое место"
+        name="add-place"
+        buttonName="Создать"
+      >
+        <input
+          required
+          name="place-name"
+          type="text"
+          className="popup-new-place__description popup__input popup__name"
+          placeholder="Название"
+          minLength="2"
+          maxLength="30"
+        />
+        <span
+          id="place-name-error"
+          className="error">
+        </span>
+        <input
+          required
+          name="place-link"
+          type="url"
+          className="popup-new-place__image-link popup__input popup__job"
+          placeholder="Ссылка на картинку"
+        />
+        <span
+          id="place-link-error"
+          className="error">
+        </span>
+      </PopupWithForm>
+
+      <PopupWithForm
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        name="edit-profile"
+        title="Редактировать профиль"
+        buttonName="Сохранить"
+      >
+        <input
+          required
+          name="profile-name"
+          type="text"
+          className="popup__name popup__input"
+          placeholder="Имя"
+          minLength="2"
+          maxLength="40"
+        />
+        <span
+          id="profile-name-error"
+          className="error">
+        </span>
+        <input
+          required
+          name="profile-job"
+          type="text"
+          className="popup__job popup__input"
+          placeholder="О себе"
+          minLength="2"
+          maxLength="200"
+        />
+        <span
+          id="profile-job-error"
+          className="error">
+        </span>
+
+      </PopupWithForm>
 
       <ImagePopup />
     </div>
