@@ -12,6 +12,12 @@ function App() {
   const [isEditProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  function handleCardClick(props) {
+    setSelectedCard(props);
+  }
+
   function handleEditAvatarClick() {
     setIsAvatarPopupOpen(true);
   }
@@ -28,6 +34,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsAvatarPopupOpen(false);
     setIsProfilePopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -38,6 +45,7 @@ function App() {
         isEditAvatarPopupOpen={handleEditAvatarClick}
         isEditProfilePopupOpen={handleEditProfileClick}
         isAddPlacePopupOpen={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
 
       <Footer />
@@ -132,7 +140,18 @@ function App() {
 
       </PopupWithForm>
 
-      <ImagePopup />
+      <PopupWithForm
+        onClose={closeAllPopups}
+        name="confirm-delete"
+        title="Вы уверены?"
+        buttonName="Да"
+      >
+      </PopupWithForm>
+
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
     </div>
 
       // <div className="popup popup__error">
@@ -141,18 +160,6 @@ function App() {
       //     <h2 className="popup__title popup__title_error">Ошибка</h2>
       //     <p className="popup__error-text"></p>
       //     <button type="submit" className="popup__button popup__error-button popup__button-confirm">Закрыть</button>
-      //   </div>
-      // </div>
-
-      // <div className="popup-image popup">
-      //   <div className="popup-image__container">
-      //     <button className="popup__close popup-image__close"></button>
-      //     <div className="popup-image__content-container">
-      //       <figure className="popup-image__photo">
-      //         <img src="" alt="" className="popup-image__preview" />
-      //         <figcaption className="popup-image__title"></figcaption>
-      //       </figure>
-      //     </div>
       //   </div>
       // </div>
   );

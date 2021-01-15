@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import api from '../utils/Api';
 import Card from './Card';
 
-function Main({isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen}) {
+function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
 
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
@@ -50,6 +50,7 @@ function Main({isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpe
             <Card
               card={card}
               key={card._id}
+              onCardClick={onCardClick}
             />
           ))
         }

@@ -1,9 +1,13 @@
 import React from "react";
 
-function Card({ card }) {
+function Card({ card, onCardClick }) {
+
+  function handleClick() {
+    onCardClick(card)
+  }
   return (
     <figure className="element">
-      <img className="element__image" src={card.link} alt="Фотография места"/>
+      <img className="element__image" src={card.link} alt="Фотография места" onClick={handleClick} />
       <button type="button" className="element__delete-button"></button>
       <figcaption className="element__caption">
         <h2 className="element__title">{card.name}</h2>
