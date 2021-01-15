@@ -1,35 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import api from '../utils/Api';
+import Card from './Card';
 
 function Main({isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen}) {
 
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
 
-  React.useEffect(() => {
-    Promise.resolve(api.getUserData())
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api.getUserData()
       .then(res => {
         setUserName(res.name);
-      })
-      .catch((err) => console.log(err));
-  });
-
-  React.useEffect(() => {
-    Promise.resolve(api.getUserData())
-      .then(res => {
         setUserDescription(res.about);
-      })
-      .catch((err) => console.log(err));
-  });
-
-  React.useEffect(() => {
-    Promise.resolve(api.getUserData())
-      .then(res => {
         setUserAvatar(res.avatar);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
+
+  useEffect(() => {
+    api.getCards()
+      .then(res => {
+        setCards(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <main className="content">
@@ -47,7 +44,16 @@ function Main({isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpe
         </div>
         <button type="button" className="profile__add-button" onClick={isAddPlacePopupOpen}></button>
       </section>
-      <section className="elements"></section>
+      <section className="elements">
+        {
+          cards.map(card => (
+            <Card
+              card={card}
+              key={card._id}
+            />
+          ))
+        }
+      </section>
     </main>
   );
 }
