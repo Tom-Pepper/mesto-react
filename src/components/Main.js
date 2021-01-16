@@ -1,43 +1,62 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import api from '../utils/Api';
+import Card from './Card';
 
-function handleEditAvatarClick() {
-  const editAvatarButton = document.querySelector('.profile__avatar-wrapper');
-  const editAvatarPopup = document.querySelector('.popup__edit-avatar');
-  editAvatarButton.addEventListener('click', () => editAvatarPopup.classList.add('popup_is-opened'));
-} 
+function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
 
-function handleEditProfileClick() {
-  const editProfileButton = document.querySelector('.profile__edit-button');
-  const editProfilePopup = document.querySelector('.popup__edit-profile');
-  editProfileButton.addEventListener('click', () => editProfilePopup.classList.add('popup_is-opened'));	
-}
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
 
-function handleAddPlaceClick() {
-  const addPlaceButton = document.querySelector('.profile__add-button');
-  const addPlacePopup = document.querySelector('.popup-new-place');	
-  addPlaceButton.addEventListener('click', () => addPlacePopup.classList.add('popup_is-opened'));
-}
+  const [cards, setCards] = useState([]);
 
-function Main() {
+  useEffect(() => {
+    api.getUserData()
+      .then(res => {
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    api.getCards()
+      .then(res => {
+        setCards(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__wrapper">
-          <div className="profile__avatar-wrapper" onClick={handleEditAvatarClick}>
+          <div className="profile__avatar-wrapper" onClick={isEditAvatarPopupOpen}>
             <button type="button" className="profile__avatar-edit-button"></button>
-            <img className="profile__avatar" src="" alt="Аватар пользователя" />
+            <img className="profile__avatar" src={`${userAvatar}`} alt="Аватар пользователя" />
           </div>
           <div className="profile__info">
-            <h1 className="profile__info-name">Жак</h1>
-            <p className="profile__info-job">Ширак</p>
-            <button type="button" className="profile__edit-button" onClick={handleEditProfileClick}></button>
+            <h1 className="profile__info-name">{userName}</h1>
+            <p className="profile__info-job">{userDescription}</p>
+            <button type="button" className="profile__edit-button" onClick={isEditProfilePopupOpen}></button>
           </div>
         </div>
-        <button type="button" className="profile__add-button" onClick={handleAddPlaceClick}></button>
+        <button type="button" className="profile__add-button" onClick={isAddPlacePopupOpen}></button>
       </section>
-      <section className="elements"></section>
+      <section className="elements">
+        {
+          cards.map(card => (
+            <Card
+              card={card}
+              key={card._id}
+              onCardClick={onCardClick}
+            />
+          ))
+        }
+      </section>
     </main>
   );
 }
-  
+
 export default Main;
