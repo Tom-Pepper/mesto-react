@@ -8,12 +8,15 @@ import ImagePopup from './ImagePopup';
 
 function App() {
 
+  //Стейты для поп-апов (состояние - открыт / не открыт
   const [isEditAvatarPopupOpen, setIsAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
+  //Стейт для выбранной карточки, исп. в поп-апе картинки в полном размере
   const [selectedCard, setSelectedCard] = useState(null);
 
+  //Функции для изменения состояний поп-апов
   function handleCardClick(props) {
     setSelectedCard(props);
   }
@@ -42,9 +45,9 @@ function App() {
       <Header />
 
       <Main
-        isEditAvatarPopupOpen={handleEditAvatarClick}
-        isEditProfilePopupOpen={handleEditProfileClick}
-        isAddPlacePopupOpen={handleAddPlaceClick}
+        onEditAvatarPopupOpen={handleEditAvatarClick}
+        onEditProfilePopupOpen={handleEditProfileClick}
+        onAddPlacePopupOpen={handleAddPlaceClick}
         onCardClick={handleCardClick}
       />
 
@@ -153,15 +156,6 @@ function App() {
         onClose={closeAllPopups}
       />
     </div>
-
-      // <div className="popup popup__error">
-      //   <div className="popup__container">
-      //     <button type="button" className="popup__close"></button>
-      //     <h2 className="popup__title popup__title_error">Ошибка</h2>
-      //     <p className="popup__error-text"></p>
-      //     <button type="submit" className="popup__button popup__error-button popup__button-confirm">Закрыть</button>
-      //   </div>
-      // </div>
   );
 }
 
