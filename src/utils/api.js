@@ -3,29 +3,28 @@
  */
 
 class Api {
-  constructor(config, errorHandler) {
+  constructor(config) {
     this._url = config.url;
     this._headers = config.headers;
-    this._errorHandler = errorHandler;
   }
 
   _getResponse(res) {
     if(res.ok) {
       return res.json();
     } else {
-      return Promise.reject(this._errorHandler(res.status));
+      return Promise.reject(`Ошибка: ${res.status}`);
     }
   }
 
   getCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       headers: this._headers
     })
       .then(res => this._getResponse(res))
   }
 
   getUserData() {
-    return fetch(`${this._url}users/me`,
+    return fetch(`${this._url}/users/me`,
       {
         headers: this._headers
       })
@@ -37,7 +36,7 @@ class Api {
   }
 
   editProfile(name, job) {
-    return fetch(`${this._url}users/me`,
+    return fetch(`${this._url}/users/me`,
       {
         method: "PATCH",
         headers: this._headers,
@@ -50,7 +49,7 @@ class Api {
   }
 
   addNewCard(name, link) {
-    return fetch(`${this._url}cards`,
+    return fetch(`${this._url}/cards`,
       {
         method: "POST",
         headers: this._headers,
@@ -63,7 +62,7 @@ class Api {
   }
 
   likeCard(id) {
-    return fetch(`${this._url}cards/likes/${id}`,
+    return fetch(`${this._url}/cards/likes/${id}`,
       {
         method: "PUT",
         headers: this._headers
@@ -72,7 +71,7 @@ class Api {
   }
 
   dislikeCard(id) {
-    return fetch(`${this._url}cards/likes/${id}`,
+    return fetch(`${this._url}/cards/likes/${id}`,
       {
         method: "DELETE",
         headers: this._headers,
@@ -81,7 +80,7 @@ class Api {
   }
 
   deleteCard(id) {
-    return fetch(`${this._url}cards/${id}`,
+    return fetch(`${this._url}/cards/${id}`,
       {
         method: "DELETE",
         headers: this._headers,
@@ -90,7 +89,7 @@ class Api {
   }
 
   uploadAvatar(url) {
-    return fetch(`${this._url}users/me/avatar`,
+    return fetch(`${this._url}/users/me/avatar`,
       {
         method: "PATCH",
         headers: this._headers,
@@ -103,7 +102,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-18/',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-18',
   headers: {
     authorization: "36f02e32-425e-4cd6-9a5e-ab45df68f83b",
     "Content-Type": "application/json"

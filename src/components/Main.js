@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import api from '../utils/Api';
+import api from '../utils/api';
 import Card from './Card';
 
-function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
+function Main({ onEditAvatarPopupOpen, onEditProfilePopupOpen, onAddPlacePopupOpen, onCardClick }) {
 
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
@@ -18,9 +18,6 @@ function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOp
         setUserAvatar(res.avatar);
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
     api.getCards()
       .then(res => {
         setCards(res);
@@ -32,17 +29,17 @@ function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOp
     <main className="content">
       <section className="profile">
         <div className="profile__wrapper">
-          <div className="profile__avatar-wrapper" onClick={isEditAvatarPopupOpen}>
+          <div className="profile__avatar-wrapper" onClick={onEditAvatarPopupOpen}>
             <button type="button" className="profile__avatar-edit-button"></button>
             <img className="profile__avatar" src={`${userAvatar}`} alt="Аватар пользователя" />
           </div>
           <div className="profile__info">
             <h1 className="profile__info-name">{userName}</h1>
             <p className="profile__info-job">{userDescription}</p>
-            <button type="button" className="profile__edit-button" onClick={isEditProfilePopupOpen}></button>
+            <button type="button" className="profile__edit-button" onClick={onEditProfilePopupOpen}></button>
           </div>
         </div>
-        <button type="button" className="profile__add-button" onClick={isAddPlacePopupOpen}></button>
+        <button type="button" className="profile__add-button" onClick={onAddPlacePopupOpen}></button>
       </section>
       <section className="elements">
         {
