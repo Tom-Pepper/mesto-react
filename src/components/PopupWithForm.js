@@ -6,7 +6,7 @@ function PopupWithForm({ isOpen, onClose, name, title, children, buttonName }) {
         <div className="popup__container">
           <button type="button" className="popup__close" onClick={onClose}></button>
           <h2 className="popup__title">{title}</h2>
-          <form name={`${name}`} className="popup__form">
+          <form name={name} className="popup__form">
             {children}
             <button type="submit" className="popup__button">{buttonName}</button>
           </form>

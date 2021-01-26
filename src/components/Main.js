@@ -1,23 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import api from '../utils/api';
 import Card from './Card';
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main({ onEditAvatarPopupOpen, onEditProfilePopupOpen, onAddPlacePopupOpen, onCardClick }) {
+function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
+  //Подписка на контекст CurrentUserContext
+  const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser.name);
 
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-
+  //Стейт для карточек
   const [cards, setCards] = useState([]);
 
+  //Получаем данные по пользователю и карточки с сервера
   useEffect(() => {
-    api.getUserData()
-      .then(res => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch((err) => console.log(err));
     api.getCards()
       .then(res => {
         setCards(res);
@@ -29,17 +24,17 @@ function Main({ onEditAvatarPopupOpen, onEditProfilePopupOpen, onAddPlacePopupOp
     <main className="content">
       <section className="profile">
         <div className="profile__wrapper">
-          <div className="profile__avatar-wrapper" onClick={onEditAvatarPopupOpen}>
+          <div className="profile__avatar-wrapper" onClick={isEditAvatarPopupOpen}>
             <button type="button" className="profile__avatar-edit-button"></button>
-            <img className="profile__avatar" src={`${userAvatar}`} alt="Аватар пользователя" />
+            <img className="profile__avatar" src={`${currentUser.avatar}`} alt="Аватар пользователя" />
           </div>
           <div className="profile__info">
-            <h1 className="profile__info-name">{userName}</h1>
-            <p className="profile__info-job">{userDescription}</p>
-            <button type="button" className="profile__edit-button" onClick={onEditProfilePopupOpen}></button>
+            <h1 className="profile__info-name">{currentUser.name}</h1>
+            <p className="profile__info-job">{currentUser.about}</p>
+            <button type="button" className="profile__edit-button" onClick={isEditProfilePopupOpen}></button>
           </div>
         </div>
-        <button type="button" className="profile__add-button" onClick={onAddPlacePopupOpen}></button>
+        <button type="button" className="profile__add-button" onClick={isAddPlacePopupOpen}></button>
       </section>
       <section className="elements">
         {
