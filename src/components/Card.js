@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Card({ card, onCardClick, onCardLike }) {
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   //Подписка на контекст CurrentUserContext
   const currentUser = useContext(CurrentUserContext);
 
@@ -31,10 +31,15 @@ function Card({ card, onCardClick, onCardLike }) {
     onCardLike(card)
   }
 
+  //Обработчик удаления карточки
+  function handleDeleteCard() {
+    onCardDelete(card)
+  }
+
   return (
     <figure className="element">
       <img className="element__image" src={card.link} alt="Фотография места" onClick={handleCardClick} />
-      <button type="button" className={cardDeleteButtonClassName}></button>
+      <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteCard}></button>
       <figcaption className="element__caption">
         <h2 className="element__title">{card.name}</h2>
         <div className="element__like-wrapper">

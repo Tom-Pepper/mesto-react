@@ -30,7 +30,17 @@ function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOp
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
       // Обновляем стейт
       setCards(newCards);
-    });
+    })
+      .catch(err => console.log(err));
+  }
+
+  //Функция удаления карточки, по аналогии с функцией лайка
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(cards.filter(item => item._id !== card._id));
+      })
+      .catch(err => console.log(err));
   }
 
   return (
@@ -57,6 +67,7 @@ function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOp
               key={card._id}
               onCardClick={onCardClick}
               onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
             />
           ))
         }
