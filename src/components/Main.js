@@ -6,7 +6,6 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
   //Подписка на контекст CurrentUserContext
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser.name);
 
   //Стейт для карточек
   const [cards, setCards] = useState([]);
