@@ -101,6 +101,7 @@ class Api {
   }
 }
 
+//Объект api для доступа к серверу, откуда будем тянуть все нужные данные
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-18',
   headers: {
