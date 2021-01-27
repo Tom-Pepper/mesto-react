@@ -47,7 +47,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         placeholder="Ссылка на фотографию"
         ref={avatarRef}
         onChange={handleChangeAvatar}
-        value={avatar}
+        value={avatar ? avatar : ''}
       />
       <span
         id="avatar-error"
