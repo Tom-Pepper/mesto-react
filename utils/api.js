@@ -99,8 +99,18 @@ class Api {
       })
       .then(res => this._getResponse(res))
   }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this._url}/cards/likes/${cardId}`,
+      {
+        method: isLiked ? "PUT" : "DELETE",
+        headers: this._headers
+      })
+      .then(res => this._getResponse(res))
+  }
 }
 
+//Объект api для доступа к серверу, откуда будем тянуть все нужные данные
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-18',
   headers: {
