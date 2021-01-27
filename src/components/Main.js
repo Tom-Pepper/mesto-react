@@ -1,47 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
-import api from '../utils/api';
+import React, {useContext} from 'react';
 import Card from './Card';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
+function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick, cards, onCardLike,
+                onCardDelete }) {
   //Подписка на контекст CurrentUserContext
   const currentUser = useContext(CurrentUserContext);
-
-  //Стейт для карточек
-  const [cards, setCards] = useState([]);
-
-  //Получаем данные по пользователю и карточки с сервера
-  useEffect(() => {
-    api.getCards()
-      .then(res => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  //Функция лайка карточки
-  function handleCardLike(card) {
-    //Проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-      // Обновляем стейт
-      setCards(newCards);
-    })
-      .catch(err => console.log(err));
-  }
-
-  //Функция удаления карточки, по аналогии с функцией лайка
-  function handleCardDelete(card) {
-    api.deleteCard(card._id)
-      .then(() => {
-        setCards(cards.filter(item => item._id !== card._id));
-      })
-      .catch(err => console.log(err));
-  }
 
   return (
     <main className="content">
@@ -66,8 +30,8 @@ function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOp
               card={card}
               key={card._id}
               onCardClick={onCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))
         }
