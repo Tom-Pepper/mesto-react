@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7096e3f4-9e02-4623-b890-21b7f458a20d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/EditProfilePopup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/EditAvatarPopup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/CurrentUserContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/CurrentUserContext.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +47,7 @@
       <workItem from="1610632817993" duration="16969000" />
       <workItem from="1610956352571" duration="1584000" />
       <workItem from="1611661394281" duration="5937000" />
-      <workItem from="1611730889473" duration="2217000" />
+      <workItem from="1611730889473" duration="4574000" />
     </task>
     <servers />
   </component>
