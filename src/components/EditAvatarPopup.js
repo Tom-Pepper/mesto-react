@@ -17,6 +17,10 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     setAvatar(currentUser.avatar)
   }, [currentUser])
 
+  useEffect(() => {
+    setAvatar('')
+  }, [isOpen])
+
   function handleChangeAvatar(event) {
     setAvatar(event.target.value)
   }
@@ -47,6 +51,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         placeholder="Ссылка на фотографию"
         ref={avatarRef}
         onChange={handleChangeAvatar}
+        value={avatar ? avatar : ''}
       />
       <span
         id="avatar-error"
