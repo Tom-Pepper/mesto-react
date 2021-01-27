@@ -7,6 +7,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   //Cтейт для данных пользователя
@@ -28,23 +29,37 @@ function App() {
   //Стейт для выбранной карточки, исп. в поп-апе картинки в полном размере
   const [selectedCard, setSelectedCard] = useState(null);
 
-  //Функции для изменения состояний поп-апов
+  //Обработчик клика по изображению карточки (открытие поп-апа картинки)
   function handleCardClick(props) {
     setSelectedCard(props);
   }
 
+  //Обработчик для отправки данных пользователя на сервер (редактирование данных профиля)
+  function handleUpdateUser(user) {
+    api.editProfile(user.name, user.about)
+      .then(res => {
+        setCurrentUser(res);
+        closeAllPopups()
+      })
+      .catch(err => console.log(err))
+  }
+
+  //Обработчик кнопки редактирования аватарки
   function handleEditAvatarClick() {
     setIsAvatarPopupOpen(true);
   }
 
+  //Обработчик кнопки редактирования инф-ии профиля
   function handleEditProfileClick() {
     setIsProfilePopupOpen(true);
   }
 
+  //Обработчик кнопки добавления карточки
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
 
+  //Обработчик закрытия поп-апов
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsAvatarPopupOpen(false);
@@ -120,41 +135,11 @@ function App() {
           </span>
         </PopupWithForm>
 
-        <PopupWithForm
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          name="edit-profile"
-          title="Редактировать профиль"
-          buttonName="Сохранить"
-        >
-          <input
-            required
-            name="profile-name"
-            type="text"
-            className="popup__name popup__input"
-            placeholder="Имя"
-            minLength="2"
-            maxLength="40"
-          />
-          <span
-            id="profile-name-error"
-            className="error">
-          </span>
-          <input
-            required
-            name="profile-job"
-            type="text"
-            className="popup__job popup__input"
-            placeholder="О себе"
-            minLength="2"
-            maxLength="200"
-          />
-          <span
-            id="profile-job-error"
-            className="error">
-          </span>
-
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         <PopupWithForm
           onClose={closeAllPopups}
