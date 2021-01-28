@@ -38,7 +38,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   return (
     <figure className="element">
-      <img className="element__image" src={card.link} alt="Фотография места" onClick={handleCardClick} />
+      <img className="element__image" src={card.link} alt={card.name} onClick={handleCardClick} />
       <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteCard}></button>
       <figcaption className="element__caption">
         <h2 className="element__title">{card.name}</h2>

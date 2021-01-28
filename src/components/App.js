@@ -13,7 +13,7 @@ import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   //Стейт для данных пользователя
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     api.getUserData()
