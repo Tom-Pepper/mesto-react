@@ -2,18 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7096e3f4-9e02-4623-b890-21b7f458a20d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/contexts/CurrentUserContext.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Card.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EditorConfigPreviewManager">
+    <editorConfig file="$PROJECT_DIR$/.editorconfig" previewFile="$PROJECT_DIR$/src/components/App.js" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1n3qxsgoeX6mPgfZFktlnXpsw4R" />
@@ -46,7 +54,8 @@
       <workItem from="1610629379859" duration="3024000" />
       <workItem from="1610632817993" duration="16969000" />
       <workItem from="1610956352571" duration="1584000" />
-      <workItem from="1611661394281" duration="1071000" />
+      <workItem from="1611661394281" duration="5937000" />
+      <workItem from="1611730889473" duration="8021000" />
     </task>
     <servers />
   </component>

@@ -1,24 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
-import api from '../utils/api';
+import React, {useContext} from 'react';
 import Card from './Card';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick }) {
+function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, onCardClick, cards, onCardLike,
+                onCardDelete }) {
   //Подписка на контекст CurrentUserContext
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser.name);
-
-  //Стейт для карточек
-  const [cards, setCards] = useState([]);
-
-  //Получаем данные по пользователю и карточки с сервера
-  useEffect(() => {
-    api.getCards()
-      .then(res => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <main className="content">
@@ -43,6 +30,8 @@ function Main({ isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOp
               card={card}
               key={card._id}
               onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))
         }
