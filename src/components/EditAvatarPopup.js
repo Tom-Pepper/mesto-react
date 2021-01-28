@@ -9,21 +9,17 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   //Реф для прямого доступа к DOM-элементу инпута и его значению
   const avatarRef = useRef('');
 
-  //Стейт для аватарки
-  const [avatar, setAvatar] = useState('');
+  console.log(avatarRef);
 
   //Установка аватарки пользователя
   useEffect(() => {
-    setAvatar(currentUser.avatar)
+    avatarRef.current.value = currentUser.avatar;
   }, [currentUser])
 
+  //Очистка поля ввода ссылки после закрытия
   useEffect(() => {
-    setAvatar('')
+    avatarRef.current.value = '';
   }, [isOpen])
-
-  function handleChangeAvatar(event) {
-    setAvatar(event.target.value)
-  }
 
   //Обработчик сабмита формы (обновление аватарки)
   function handleSubmit(event) {
@@ -50,8 +46,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         required
         placeholder="Ссылка на фотографию"
         ref={avatarRef}
-        onChange={handleChangeAvatar}
-        value={avatar ? avatar : ''}
       />
       <span
         id="avatar-error"
