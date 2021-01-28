@@ -9,8 +9,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   //Реф для прямого доступа к DOM-элементу инпута и его значению
   const avatarRef = useRef('');
 
-  console.log(avatarRef);
-
   //Установка аватарки пользователя
   useEffect(() => {
     avatarRef.current.value = currentUser.avatar;
